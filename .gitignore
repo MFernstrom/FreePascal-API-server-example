@@ -1,1 +1,4 @@
 *.bak
+source/bin
+source/backup
+source/lib

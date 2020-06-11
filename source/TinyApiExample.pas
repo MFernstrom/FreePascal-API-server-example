@@ -9,7 +9,7 @@ program TinyApiExample;
 
 uses
   {$IFDEF UNIX}cthreads, cmem,{$ENDIF}
-  SysUtils, fphttpapp, httpdefs, httproute, IniFiles;
+  SysUtils, fphttpapp, httpdefs, httproute;
 
 procedure exampleEndpoint(aRequest : TRequest; aResponse : TResponse);
 begin
@@ -35,6 +35,6 @@ begin
   HTTPRouter.RegisterRoute('/docs', @docsEndpoint, true);
   Application.Threaded := true;
   Application.Initialize;
-  WriteLn('Example HTTP server is ready at http://localhost:9080/');
+  WriteLn('Server is ready at http://localhost:9080/');
   Application.Run;
 end.

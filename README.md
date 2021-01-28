@@ -1,4 +1,10 @@
-# FPHTTPServer Example
-This is a bootstrap/skeleton/starting point for anyone wanting to use FPHTTPServer to create a web API with FreePascal.
+<img src="Lazarus.png" width="200" />
 
-Tested on Windows but should work on Linux and OSX as well.
+FreePascal / Lazarus example of how to create a REST API using the Lazarus FPHTTPServer.
+
+Included
+
+* Several endpoints
+* JSON data generation
+* Custom content type header
+* Default handler

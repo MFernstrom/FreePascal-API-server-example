@@ -30,7 +30,6 @@
       <Unit0>
         <Filename Value="TinyApiExample.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="hi"/>
       </Unit0>
     </Units>
   </ProjectOptions>

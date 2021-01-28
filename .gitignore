@@ -1,4 +1,5 @@
 *.bak
+*.lps
 source/bin
 source/backup
 source/lib

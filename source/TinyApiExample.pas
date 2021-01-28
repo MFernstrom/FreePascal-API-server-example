@@ -9,23 +9,30 @@ program TinyApiExample;
 
 uses
   {$IFDEF UNIX}cthreads, cmem,{$ENDIF}
-  fphttpapp, httpdefs, httproute;
+  SysUtils, fphttpapp, httpdefs, httproute, fpjson;
 
 procedure jsonEndpoint(aRequest : TRequest; aResponse : TResponse);
+var
+  jObject : TJSONObject;
 begin
-  aResponse.Content := '{"success": true, "data": "This is a json object"}';
-  aResponse.Code := 200;
-  aResponse.ContentType := 'application/json';
-  aResponse.ContentLength := length(aResponse.Content);
-  aResponse.SendContent;
+  jObject := TJSONObject.Create;
+  try
+    jObject.Booleans['success'] := true;
+    jObject.Strings['data'] := 'This is a JSON object';
+    jObject.Integers['numbers'] := 12345;
+
+    aResponse.Content := jObject.AsJSON;
+    aResponse.ContentType := 'application/json';
+    aResponse.SendContent;
+  finally
+    jObject.Free;
+  end;
 end;
 
 procedure textEndpoint(aRequest : TRequest; aResponse : TResponse);
 begin
   aResponse.Content := 'This is the default response if no other routes match.';
-  aResponse.Code := 200;
   aResponse.ContentType := 'text/plain';
-  aResponse.ContentLength := length(aResponse.Content);
   aResponse.SendContent;
 end;
 
@@ -35,6 +42,7 @@ begin
   HTTPRouter.RegisterRoute('/text', @textEndpoint, true);
   Application.Threaded := true;
   Application.Initialize;
-  WriteLn('Server is ready at http://localhost:9080/');
+  WriteLn('Server is ready at http://localhost:' + IntToStr(Application.Port));
   Application.Run;
 end.
+
